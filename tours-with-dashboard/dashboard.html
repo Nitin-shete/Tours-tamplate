@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>TourWorld - Admin Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <button class="btn btn-primary me-3" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-brand fw-bold" href="#"><i class="fas fa-globe-americas me-2"></i>TourWorld Admin</a>
+            
+            <div class="navbar-nav ms-auto d-flex flex-row">
+                <div class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-envelope me-2"></i>New enquiry received</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-star me-2"></i>New tour booking</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>User registered</a></li>
+                    </ul>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=32&h=32&q=80" 
+                             class="rounded-circle me-2" width="32" height="32" alt="Admin">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h5 class="text-white mb-0">Dashboard Menu</h5>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-page="home">
+                    <i class="fas fa-home me-2"></i>Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="tours-list">
+                    <i class="fas fa-list me-2"></i>Tours List
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="add-tours">
+                    <i class="fas fa-plus me-2"></i>Add Tours
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="sales">
+                    <i class="fas fa-chart-line me-2"></i>Sales
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="enquiry">
+                    <i class="fas fa-envelope me-2"></i>Enquiry
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Home Dashboard -->
+        <div class="page-content active" id="home-page">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="page-title">Dashboard Overview</h2>
+                        <p class="text-muted">Welcome back! Here's what's happening with your tours today.</p>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card bg-primary">
+                            <div class="stats-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number">24</h3>
+                                <p class="stats-label">Total Tours</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card bg-success">
+                            <div class="stats-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number">18</h3>
+                                <p class="stats-label">Active Tours</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card bg-warning">
+                            <div class="stats-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number">47</h3>
+                                <p class="stats-label">Today's Enquiries</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stats-card bg-info">
+                            <div class="stats-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number">1,247</h3>
+                                <p class="stats-label">Website Visitors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row mb-4">
+                    <div class="col-lg-8 mb-4">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Daily Enquiries (Last 7 Days)</h5>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="enquiryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Tour Categories</h5>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <h5 class="activity-title">Recent Bookings</h5>
+                            </div>
+                            <div class="activity-body">
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-success">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>Mumbai Adventure</h6>
+                                        <p class="text-muted mb-0">Booked by John Doe - $899</p>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-primary">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>Spanish Fiesta</h6>
+                                        <p class="text-muted mb-0">Booked by Jane Smith - $1,299</p>
+                                        <small class="text-muted">4 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-warning">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>Italian Romance</h6>
+                                        <p class="text-muted mb-0">Booked by Mike Johnson - $1,599</p>
+                                        <small class="text-muted">6 hours ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <h5 class="activity-title">Recent Enquiries</h5>
+                            </div>
+                            <div class="activity-body">
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-info">
+                                        <i class="fas fa-question-circle"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>Tour Duration Query</h6>
+                                        <p class="text-muted mb-0">From: sarah@email.com</p>
+                                        <small class="text-muted">1 hour ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-secondary">
+                                        <i class="fas fa-question-circle"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>Group Booking Inquiry</h6>
+                                        <p class="text-muted mb-0">From: company@business.com</p>
+                                        <small class="text-muted">3 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-danger">
+                                        <i class="fas fa-question-circle"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h6>Cancellation Request</h6>
+                                        <p class="text-muted mb-0">From: customer@email.com</p>
+                                        <small class="text-muted">5 hours ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Tours Page -->
+        <div class="page-content" id="add-tours-page">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="page-title">Add New Tour</h2>
+                        <p class="text-muted">Create a new tour package with all necessary details.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-card">
+                            <form id="addTourForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourName" class="form-label">Tour Name *</label>
+                                        <input type="text" class="form-control" id="tourName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourDestination" class="form-label">Destination *</label>
+                                        <input type="text" class="form-control" id="tourDestination" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="tourPrice" class="form-label">Price ($) *</label>
+                                        <input type="number" class="form-control" id="tourPrice" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="tourDuration" class="form-label">Duration (Days) *</label>
+                                        <input type="number" class="form-control" id="tourDuration" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="tourCategory" class="form-label">Category *</label>
+                                        <select class="form-select" id="tourCategory" required>
+                                            <option value="">Select Category</option>
+                                            <option value="adventure">Adventure</option>
+                                            <option value="cultural">Cultural</option>
+                                            <option value="romantic">Romantic</option>
+                                            <option value="family">Family</option>
+                                            <option value="luxury">Luxury</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tourDescription" class="form-label">Description *</label>
+                                    <textarea class="form-control" id="tourDescription" rows="4" required></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourImage" class="form-label">Tour Image URL</label>
+                                        <input type="url" class="form-control" id="tourImage">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourMaxGroup" class="form-label">Max Group Size</label>
+                                        <input type="number" class="form-control" id="tourMaxGroup">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tourHighlights" class="form-label">Tour Highlights</label>
+                                    <textarea class="form-control" id="tourHighlights" rows="3" 
+                                              placeholder="Enter highlights separated by commas"></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourIncludes" class="form-label">What's Included</label>
+                                        <textarea class="form-control" id="tourIncludes" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourExcludes" class="form-label">What's Excluded</label>
+                                        <textarea class="form-control" id="tourExcludes" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourStartDate" class="form-label">Available From</label>
+                                        <input type="date" class="form-control" id="tourStartDate">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tourEndDate" class="form-label">Available Until</label>
+                                        <input type="date" class="form-control" id="tourEndDate">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="tourActive" checked>
+                                        <label class="form-check-label" for="tourActive">
+                                            Active Tour (Available for booking)
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-3">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i>Save Tour
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="previewTour">
+                                        <i class="fas fa-eye me-2"></i>Preview
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-secondary">
+                                        <i class="fas fa-undo me-2"></i>Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-card">
+                            <h5 class="mb-3">Tour Preview</h5>
+                            <div id="tourPreview" class="tour-preview">
+                                <div class="preview-placeholder">
+                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                    <p class="text-muted mt-2">Fill the form to see preview</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-card mt-3">
+                            <h5 class="mb-3">Quick Tips</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-lightbulb text-warning me-2"></i>Use high-quality images for better engagement</li>
+                                <li class="mb-2"><i class="fas fa-lightbulb text-warning me-2"></i>Write compelling descriptions</li>
+                                <li class="mb-2"><i class="fas fa-lightbulb text-warning me-2"></i>Include all important highlights</li>
+                                <li class="mb-2"><i class="fas fa-lightbulb text-warning me-2"></i>Set competitive pricing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tours List Page -->
+        <div class="page-content" id="tours-list-page">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="page-title">Tours Management</h2>
+                        <p class="text-muted">Manage all your tour packages.</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">All Tours</h5>
+                            <button class="btn btn-primary" data-page="add-tours">
+                                <i class="fas fa-plus me-2"></i>Add New Tour
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tour Name</th>
+                                    <th>Destination</th>
+                                    <th>Price</th>
+                                    <th>Duration</th>
+                                    <th>Status</th>
+                                    <th>Bookings</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="toursTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&h=50&q=80" 
+                                                 class="rounded me-3" width="50" height="50" alt="Tour">
+                                            <div>
+                                                <h6 class="mb-0">Mumbai Adventure</h6>
+                                                <small class="text-muted">Created 2 days ago</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Mumbai, India</td>
+                                    <td>$899</td>
+                                    <td>7 Days</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>23</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&h=50&q=80" 
+                                                 class="rounded me-3" width="50" height="50" alt="Tour">
+                                            <div>
+                                                <h6 class="mb-0">Spanish Fiesta</h6>
+                                                <small class="text-muted">Created 5 days ago</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Barcelona, Spain</td>
+                                    <td>$1,299</td>
+                                    <td>10 Days</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>18</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&h=50&q=80" 
+                                                 class="rounded me-3" width="50" height="50" alt="Tour">
+                                            <div>
+                                                <h6 class="mb-0">Italian Romance</h6>
+                                                <small class="text-muted">Created 1 week ago</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Rome, Italy</td>
+                                    <td>$1,599</td>
+                                    <td>12 Days</td>
+                                    <td><span class="badge bg-warning">Draft</span></td>
+                                    <td>12</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Page -->
+        <div class="page-content" id="sales-page">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="page-title">Sales Analytics</h2>
+                        <p class="text-muted">Track your tour sales and revenue.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Monthly Sales Revenue</h5>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enquiry Page -->
+        <div class="page-content" id="enquiry-page">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="page-title">Customer Enquiries</h2>
+                        <p class="text-muted">Manage customer inquiries and responses.</p>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Tour Interest</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <h6 class="mb-0">Sarah Johnson</h6>
+                                            <small class="text-muted">sarah@email.com</small>
+                                        </div>
+                                    </td>
+                                    <td>Mumbai Adventure</td>
+                                    <td>Interested in group booking for 8 people</td>
+                                    <td>Today</td>
+                                    <td><span class="badge bg-warning">Pending</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Reply</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Custom JS -->
+    <script src="./dashboard.js"></script>
+</body>
+
+</html>
